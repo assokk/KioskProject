@@ -1,44 +1,42 @@
 package basic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        List<MenuItem> menuItems = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("[ SHAKESHACK MENU ]");
-            System.out.println("1. ShackBurger   | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거");
-            System.out.println("2. SmokeShack    | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
-            System.out.println("3. Cheeseburger  | W 6.9 | 포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
-            System.out.println("4. Hamburger     | W 5.4 | 비프패티를 기반으로 야채가 들어간 기본버거");
-            System.out.println("0. 종료           | 종료");
+        menuItems.add(new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+        menuItems.add(new MenuItem("SmokeShack", 8.9, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
+        menuItems.add(new MenuItem("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"));
+        menuItems.add(new MenuItem("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거"));
 
-            System.out.print("원하는 메뉴를 선택하세요: ");
+        while (true) {
+            for (int i = 0; i < menuItems.size(); i++) {
+                System.out.println((i + 1) + ". " + menuItems.get(i).getName() + " | " + menuItems.get(i).getPrice() + " | " + menuItems.get(i).getDescription());
+            }
+            System.out.println("0. 종료 | 종료");
+
+            System.out.print("주문 메뉴를 선택하세요: ");
             int burgerNumber = sc.nextInt();
 
-            if(burgerNumber == 0) {
-                System.out.println("메뉴선택을 종료합니다.");
+            if (burgerNumber == 0) {
+                System.out.println("메뉴 선택을 종료합니다.");
                 break;
             }
 
-            switch (burgerNumber) {
-                case 1:
-                    System.out.println("선택한 메뉴: ShackBurger | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거");
-                    break;
-                case 2:
-                    System.out.println("선택한 메뉴: SmokeShack | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
-                    break;
-                case 3:
-                    System.out.println("선택한 메뉴: Cheeseburger | W 6.9 | 포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
-                    break;
-                case 4:
-                    System.out.println("선택한 메뉴: Hamburger | W 5.4 | 비프패티를 기반으로 야채가 들어간 기본버거");
-                    break;
-                default:
-                    System.out.println("올바른 번호를 입력하세요.");
+            if (burgerNumber < 1 || burgerNumber > menuItems.size()) {
+                System.out.println("존재하지 않는 메뉴입니다. 다시 선택해주세요.");
+                continue;
             }
+
+            MenuItem selectedItem = menuItems.get(burgerNumber - 1);
+            System.out.print("선택한 메뉴: ");
+            System.out.println(selectedItem.getName() + " | " + selectedItem.getPrice() + " | " + selectedItem.getDescription());
         }
     }
 }
