@@ -25,4 +25,8 @@ public class MenuItem {
     public String getDescription() {
         return description;
     }
+
+    public void printDetails() {
+        System.out.println("선택한 메뉴: " + name + " | " + price + " | " + description);
+    }
 }
