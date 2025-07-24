@@ -8,10 +8,12 @@ public class Kiosk {
     Scanner sc = new Scanner(System.in);
     private List<Menu> menus = new ArrayList<>();
 
+    // 생성자: 메뉴 리스트를 받아 Kiosk에 설정
     public Kiosk (List<Menu> menus) {
         this.menus = menus;
     }
 
+    // 키오스크 실행 메서드: 메인 메뉴부터 주문까지 흐름 제어
     public void start() {
         while (true) {
             System.out.println("[ MAIN MENU ]");
@@ -32,21 +34,21 @@ public class Kiosk {
                 continue;
             }
             Menu selectedMenu = menus.get(menuChoice - 1);
-            selectedMenu.printItems();
+            selectedMenu.printItems();  // 선택한 메뉴 카테고리의 항목 출력
 
 
             System.out.print("원하는 메뉴를 선택하세요: ");
             int itemChoice = sc.nextInt();
 
             if (itemChoice == 0) {
-                continue;
+                continue;  // 상위 메뉴로 돌아가기
             }
             if (itemChoice < 1 || itemChoice > selectedMenu.getItems().size()) {
                 System.out.println("존재하지 않는 메뉴입니다. 다시 선택해주세요.");
                 continue;
             }
             MenuItem selectedMenuItem = selectedMenu.getItems().get(itemChoice - 1);
-            selectedMenuItem.printDetails();
+            selectedMenuItem.printDetails();  // 선택한 항목의 상세 정보 출력
         }
     }
 }
